@@ -1,167 +1,224 @@
-// // let name = prompt('name?');
-// // let lastName = prompt('last name?');
-// // let age = prompt('age?');
-// // console.log(`your name: ${name}, last name: ${lastName}, age: ${age}`);
+'use strict';
+
+const japaneseRestaurant = {
+    name: 'Banzai',
+    location: '108 Markham Woods Rd, Longwood, USA',
+    categories: ['Japanese', 'Sushi', 'Vegetarian', 'Organic'],
+    appetizers: ['Seaweed salad', 'Tempura shrimp', 'Edamame', 'Sushi rice'],
+    mainMenu: ['Sushi', 'Ramen', 'Tempura'],
+}
+
+const arr = [1,2];
+const x = arr[0];
+const [y1, y2] = arr;
+console.log(x);
+
+'use strict';
+
+const game = {
+    team1: 'REAL MADRID',
+    team2: 'BARCELONA',
+    players: [
+        [
+            'Courtois',
+            'Vazquez',
+            'Militao',
+            'Nacho',
+            'Mendy',
+            'Casemiro',
+            'Valverde',
+            'Modrich',
+            'Kroos',
+            'Vinicius',
+            'Benzema',
+        ],
+        [
+            'Stegen',
+            'Mingueza',
+            'Araujo',
+            'Lenglet',
+            'Dest',
+            'Busquets',
+            'Jong',
+            'Alba',
+            'Messi',
+            'Pedri',
+            'Dembele',
+        ],
+    ],
+    score: '2:1',
+    scored: ['Kroos', 'Benzema','Benzema', 'Mingueza'],
+    date: 'Apr 10th, 2021',
+    odds: {
+        team1: 1.48,
+        draw: 2.53,
+        team2: 4.25,
+    },
+    rate(i) {
+        // return `Rate for this.game.team${i} victory: this.game.adds.team${i}`
+        switch (i) {
+            case 1:
+                console.log('Rate for ' + this.team1 + ' victory: ' + this.odds.team1)
+                break
+            case 2:
+                console.log('Rate for ' + this.team2 + ' victory: ' + this.odds.team2)
+                break
+            default:
+                console.log('Rate for draw: ' + this.odds.draw)
+        }
+
+    },
+    goalScores() {
+        for (let i of this.scored) {
+            console.log(i);
+        }
+    }
+
+
+};
+// game.goalScores();
+
+for (let [name, odd] of Object.entries(game.odds)) {
+    // console.log(name, odd);
+    const mutText = name === 'draw' ? 'draw' : `${game[name]} victory`;
+    // console.log(`Rate for ${mutText}: ${odd}`)
+}
+
+const scores = {};
+for (const player of game.scored) {
+    scores[player] ? scores[player]++ : scores[player] = 1;
+}
+console.log(scores)
+
+
+for (const [entry, i] of game.scored.entries()) {
+    // console.log(entry,i);
+    // console.log(`Goal ${entry+1}: ${i}`)
+}
+
+let oddSum = 0;
+for (const odd of Object.values(game.odds)) {
+    oddSum += odd
+}
+// console.log(oddSum);
+
+// game.rate(1);
+// game.rate(2);
+// game.rate(4);
+
+
+const medianValue = Object.values(game.odds).reduce((a, b) => a + b, 0) / Object.values(game.odds).length;
+// console.log(medianValue)
+
+const [players1] = [game.players[0]];
+const [players2] = [game.players[1]];
+const [players3] = [...game.players[0]];
+
+const [goalkeeperReal, ...otherReal] = players1;
+
+// console.log(goalkeeperReal)
+// console.log(otherReal)
+
+const allPlayers = [...game.players[0], ...game.players[1]]
+// console.log(allPlayers)
+
+const players1Total = ['Marcelo', 'Isco', 'Asensio', 'Diaz', 'Odriozola', ...players1]
+// console.log(players1Total)
+
+const {team1, team2, draw} = game.odds;
+// console.log(team1);
+
+for (const pl of players1Total.entries()) {
+    // console.log(pl)
+}
+let counter = 0;
+for (const goal of game.scored) {
+    counter += 1;
+    // console.log(`Goal ${counter}: ${goal}`)
+}
+
+
+//modal
+// const modalWindow = document.querySelector('.modal-window');
+// const overlay = document.querySelector('.overlay');
+// const btnsOpenModal = document.querySelectorAll('.show-modal-window');
+// const btnCloseModal = document.querySelector('.close-modal-window');
 //
-// // let weight = prompt('weight?')
-// // let height = prompt('height  metr?')
-// //
-// // result= weight/(height*height);
-// // let index = result >= 25 ? true : false;
-// //
-// // alert(`Are you overweight: ${index}?`);
-// // console.log(result);
-// // let res = 88;
+// for (let i = 0; i < btnsOpenModal.length; i++) {
+//     btnsOpenModal[i].addEventListener('click', function () {
+//         modalWindow.classList.remove('hidden');
+//         overlay.classList.remove('hidden');
+//     })
+// }
 //
-// // switch (res) {
-// //     case 9:
-// //         console.log('+')
-// //         break
-// //     case 10:
-// //         console.log('-')
-// //         break
-// //     default:
-// //         console.log('done')
-// // }
+// function CloseModal() {
+//     modalWindow.classList.add('hidden');
+//     overlay.classList.add('hidden');
+// }
 //
-// // let arr2 = 'tttttt'
-// // let arr = [1, 2, 3, 4];
-// //
-// // arr = arr2.split('');
-// // console.log(arr)
+// btnCloseModal.addEventListener('click', CloseModal)
+// overlay.addEventListener('click', CloseModal)
+// document.addEventListener('keydown', function (event) {
+//     console.log(event.key)
+//     if(event.key === 'Escape' && !modalWindow.classList.contains('hidden')){
+//         CloseModal();
+//     }
+// })
+
+
+// let secretNumber = Math.trunc(Math.random() * 20) + 1;
+// let score = 20
+// let bestScore = 0;
+// document.querySelector('.question').textContent = secretNumber;
+// // console.log(secretNumber)
 //
-// // console.log(arr.length)
-// // console.log(Array.isArray(arr))
-// // console.log(arr.indexOf(2))
-// // arr.push(555);
-// // arr.unshift(44,77)
-// // arr.shift();
-// // arr.join('')
-// // arr.splice(2)
-// // // let t = arr.pop();
-// // arr.reverse()
-// // console.log(arr.concat(arr2))
-// // console.log(t)
+// const eventHandler = function () {
+//     const guessNumber = Number(document.querySelector('.number-input').value);
+//     document.querySelector('.label-score').textContent = `Очки: ${score}`;
 //
-// // let test = 'test'
-// // console.log(test.lastIndexOf('t'))
+//     //no input
+//     if (!guessNumber) {
+//         document.querySelector('.guess-message').textContent = 'Введите число!';
 //
-//
-// // const PersData = ['Dima', 1986, 'unemployes'];
-// // // console.log(PersData)
-// //
-// // const PersUser = {
-// //     name: 'Dima',
-// //     age : 33,
-// //     job: 'programmer'
-// // }
-// // const Item = prompt('Choose beetween name, age and job')
-// // console.log(PersUser[Item])
+//         //  won
+//     } else if (guessNumber === secretNumber) {
+//         document.querySelector('.guess-message').textContent = 'Правильно!';
+//         document.querySelector('body').style.backgroundColor = 'green';
+//         document.querySelector('.questi' +
+//             'on').style.fontSize = '50px';
+//         document.querySelector('.question').textContent = secretNumber;
+//         if(score > bestScore) {
+//             bestScore=score
+//             document.querySelector('.highscore').textContent=bestScore
+//         }
 //
 //
-// const User = {
-//     name: 'Dima',
-//     age: 33,
-//     year: 1986,
-//     job: 'programmer',
-//     calcAge: function () {
-//         // console.log(this)
-//         return this.age = 2023 - this.year
-//     },
-//     isMarried: true,
-//     getSummary: function () {
-//         return `${this.name} is ${this.job} and his age is ${this.calcAge()}!`
+//         // to high
+//     } else if (guessNumber > secretNumber) {
+//         if (score > 1) {
+//             document.querySelector('.guess-message').textContent = 'Много!';
+//             score--;
+//         }
+//
+//         // to low
+//     } else if (guessNumber < secretNumber) {
+//         document.querySelector('.guess-message').textContent = 'Маловато!';
+//         score--;
 //     }
 // }
 //
-// // console.log(User.calcAge())
-// console.log(User.getSummary())
+// function eventAgain() {
+//     document.querySelector('.label-score').textContent = `Очки: 20`;
+//     document.querySelector('.guess-message').textContent = 'Введите число!';
+//     document.querySelector('.question').textContent = '???';
+//     document.querySelector('body').style.backgroundColor = '';
+//     secretNumber = Math.trunc(Math.random() * 20) + 1;
+//     document.querySelector('.number-input').value = '';
+//     document.querySelector('.question').textContent = secretNumber;
 //
-//
-//
-// const PersData = ['Dima', 1986, 'unemployes'];
-// let arr = [];
-// let num = 10;
-// for (let i = 0; i < PersData.length; i++) {
-//     if (typeof PersData[i] == 'number') break;
-//     console.log(PersData[i])
 // }
 //
-// // console.log(arr)
+// document.querySelector('.check').addEventListener('click', eventHandler)
+// document.querySelector('.again').addEventListener('click', eventAgain)
 //
 //
-// let result;
-// const firstName = 'Jack';
-// const lastName = 'Brown';
-// const space = ' ';
-// const age = 25;
-// const greeting = "Hey there!";
-//
-// // Concatanation
-//
-// result = firstName + space + lastName;
-//
-// result = greeting + space + 'My name is' + space + firstName
-//     + ' ' + lastName + ". I'm " + age + " years old.";
-//
-// //Escaping
-//
-// result = 'I\'m 34 years old';
-//
-// result = "I like \"Star wars\" movie";
-//
-//
-// // Properties and methods
-//
-// result = 'Hello! '.length;
-// result = firstName.length;
-//
-// // concat()
-//
-// result = firstName.concat(' ', lastName);
-//
-// result = greeting.concat(space, 'My name is ', firstName, space, lastName);
-//
-// // toUpperCase()
-//
-// result = result.toUpperCase();
-// result = result.toLowerCase();
-//
-// // index
-// result = firstName[1];
-//
-// result = 'Hello'.indexOf('l');
-// result = 'Hello lol'.lastIndexOf('l');
-// result = firstName.indexOf('a');
-// result = 'Hello lol'.indexOf('lo');
-// result = firstName.indexOf('b');
-//
-//
-// // charAt()
-// result = firstName.charAt(1);
-//
-// const longString = 'Hi, I\'m a long string';
-//
-// result = longString.charAt(longString.length - 1);
-//
-// // substring()
-// result = greeting.substring(4,9);
-//
-// // slice()
-// result = greeting.slice(4,9);
-// result = greeting.slice(-6);
-//
-// // split()
-// result = longString.split(' ');
-// const colors = 'red, orange, green, blue';
-// result = colors.split(',');
-//
-//
-// //replace()
-// result = colors.replace('blue',
-//     'yellow');
-//
-// // includes()
-// result = colors.includes('indigo');
-//
-// console.log(result);
