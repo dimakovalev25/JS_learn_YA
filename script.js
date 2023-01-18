@@ -1,7 +1,40 @@
 'use strict';
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+let words = 'underscore_case\n' +
+    'first_name\n'+
+    'next_Variable\n' +
+    'Calculate_AGE\n' +
+    'arrived_flight\n'+
+'FGRVRTTtrt_CDR';
+
+let words1= words.split('\n');
+console.log(words1)
+
+for(let word of words1){
+    let corrWordEnd=word.trim().toLowerCase().slice(word.indexOf('_')+1);
+    let corrWordUpEnd = corrWordEnd.slice(0, 1).toUpperCase()+corrWordEnd.slice(1);
+    let corrWordStart=word.toLowerCase().slice(0, word.indexOf('_'));
+    console.log(corrWordStart+corrWordUpEnd)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //string
-const airLine = 'Sky';
-const plane = 'Boing 747';
+// const airLine = 'Sky';
+// const plane = 'Boing 747';
 // console.log(plane[0]);
 // console.log(plane.lastIndexOf(4));
 // console.log(plane.indexOf('ooi'));
@@ -10,30 +43,45 @@ const plane = 'Boing 747';
 // console.log(plane.slice(plane.lastIndexOf(' '
 // )+1))
 
-let name = 'diMA $ ';
-name = name.toLowerCase();
-// console.log(name)
-let corrName = name[0].toUpperCase() + name.slice(1);
-// console.log(corrName)
+// let name = 'diMA $ ';
+// name = name.toLowerCase();
+// // console.log(name)
+// let corrName = name[0].toUpperCase() + name.slice(1);
+// // console.log(corrName)
+//
+// // let normName = name.toLowerCase().trim();
+// let normName = name.replace('$', '').trim();
+// // console.log(normName);
+//
+// let mess ='door 18-door 18'
+// // let corrMess = mess.replaceAll('door', 'gate').replace('-', ' ');
+// // console.log(corrMess);
+//
+// // console.log(name.includes('D'));
+// // console.log(name.includes('d'));
+// // console.log(name.startsWith('d'));
+//
+// let newMess= mess.split('-');
+// // console.log(newMess)
+//
+//
+// let user = 'Dima Kovalev 36age';
+// let [firstName, lastName, age] = user.split(' ');
+// console.log(firstName);
 
-// let normName = name.toLowerCase().trim();
-let normName = name.replace('$', '').trim();
-// console.log(normName);
-
-let mess ='door 18-door 18'
-let corrMess = mess.replaceAll('door', 'gate').replace('-', ' ');
-// console.log(corrMess);
-
-// console.log(name.includes('D'));
-// console.log(name.includes('d'));
-console.log(name.startsWith('d'));
-
-
-
-
-
-
-
+// const mask = function(num){
+//     const strNum = num + '';
+//     const last4 = strNum.slice(-4);
+//     console.log(last4.padStart(strNum.length, '*'))
+//
+//     // return last4
+// }
+// mask(5648462873293759);
+// mask('56484628732937563');
+// mask('56484628732937239');
+//
+// const hi = 'hi';
+// console.log(hi.repeat(500));
 
 
 
