@@ -1,25 +1,58 @@
 'use strict';
 
-document.body.append(document.createElement('textarea'));
-document.body.append(document.createElement('button'));
+// const flightNum = 'BV328'
+// const passenger1145 = {
+//     name: 'Jo',
+//     lastName: 'Brown',
+//     passport: 'HF121212'
+// }
+//
+// const checkIn = function (flight, passenger) {
+//     flight = 'bv328';
+//     passenger.name=passenger.name.toLowerCase();
+//     passenger.lastName=passenger.lastName.toLowerCase();
+//
+//     if(passenger.passport === 'HF121212'){
+//         alert ('Ok!')
+//     } else {
+//         alert ('Failed!')
+//     }
+//
+// }
+//
+// checkIn(flightNum, passenger1145);
+//
+// console.log(flightNum);
+// console.log(passenger1145);
 
-let words = 'underscore_case\n' +
-    'first_name\n'+
-    'next_Variable\n' +
-    'Calculate_AGE\n' +
-    'arrived_flight\n'+
-'FGRVRTTtrt_CDR';
 
-let words1= words.split('\n');
-console.log(words1)
-
-for(let word of words1){
-    let corrWordEnd=word.trim().toLowerCase().slice(word.indexOf('_')+1);
-    let corrWordUpEnd = corrWordEnd.slice(0, 1).toUpperCase()+corrWordEnd.slice(1);
-    let corrWordStart=word.toLowerCase().slice(0, word.indexOf('_'));
-    console.log(corrWordStart+corrWordUpEnd)
+const remSpace = function (text) {
+    return text.replace(/ /g, '-').toUpperCase();
 }
 
+const upperFirst = function (text) {
+    const [first, ...others] = text.split(' ');
+    return [first.toUpperCase(),...others].join(' ');
+}
+
+// console.log(remSpace('t t ttt  tt tt '));
+// console.log(upperFirst('tttt ttt'));
+
+
+//HOF
+// const convertor = function (str, func){
+//     // console.log(`The converted text: ${func(str)}`)
+// }
+// convertor('hello', upperFirst)
+//
+// const greet = function (text) {
+//     return function (name){
+//         console.log(`${text} ${name}`)
+//     }
+// }
+
+const hi = greet('hi');
+console.log(hi)
 
 
 
@@ -30,6 +63,49 @@ for(let word of words1){
 
 
 
+
+
+
+
+//
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+//
+//
+// document.querySelector('button').addEventListener('click', function() {
+//     const text = document.querySelector('textarea').value;
+//     console.log(text)
+//     let words1 = text.split('\n');
+//
+//
+//     for (let word of words1) {
+//         let corrWordEnd = word.toLowerCase().slice(word.indexOf('_') + 1);
+//         let corrWordUpEnd = corrWordEnd.slice(0, 1).toUpperCase() + corrWordEnd.slice(1);
+//         let corrWordStart = word.toLowerCase().slice(0, word.indexOf('_'));
+//         console.log(corrWordStart + corrWordUpEnd)
+//         document.querySelector('textarea').value=corrWordStart + corrWordUpEnd;
+//     }
+// })
+//
+//
+// let words = 'underscore_case\n' +
+//     'first_name\n' +
+//     'next_Variable\n' +
+//     'Calculate_AGE\n' +
+//     'arrived_flight\n' +
+//     'FGRVRTTtrt_CDR';
+//
+//
+//
+// let words1 = words.split('\n');
+// // console.log(words1)
+//
+// for (let word of words1) {
+//     let corrWordEnd = word.toLowerCase().slice(word.indexOf('_') + 1);
+//     let corrWordUpEnd = corrWordEnd.slice(0, 1).toUpperCase() + corrWordEnd.slice(1);
+//     let corrWordStart = word.toLowerCase().slice(0, word.indexOf('_'));
+//     // console.log(corrWordStart + corrWordUpEnd)
+// }
 
 
 //string
@@ -82,8 +158,6 @@ for(let word of words1){
 //
 // const hi = 'hi';
 // console.log(hi.repeat(500));
-
-
 
 
 // const events = new Map([
