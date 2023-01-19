@@ -1,42 +1,100 @@
 'use strict';
+//IIFI
 
-const btn = document.querySelector('.button');
-btn.addEventListener('click', () => survey.logNewAnswer())
+const runOne = function () {
+    console.log('1');
+};
 
-const btnResults = document.querySelector('.button_res');
-btnResults.addEventListener('click', () => survey.printResults(survey.answers))
+(function() {
+    // console.log('IIFI')
+})();
 
-const survey = {
-    answers: [0, 0, 0, 0, 0],
 
-    logNewAnswer() {
-        let survey = +prompt('What programming language would you like to learn?\n' +
-            '0: JavaScript\n' +
-            '1: Python\n' +
-            '2: Ruby\n' +
-            '3: Java\n' +
-            '4: C#\n')
-        this.answersChange(survey);
-        this.printResults(this.answers)
+//Closures  замыкания
+// let count = 6;
+const safeCount = function () {
+    let count = 0;
 
-    },
-
-    answersChange(survey) {
-        if (survey === 1 || survey === 2 || survey === 3 || survey === 4 || survey === 0) {
-            this.answers[survey]++
-        }
-    },
-
-    printResults(arr) {
-        console.log('Results: ' + arr);
+    return function(){
+        count++;
+        // console.log(count)
     }
 }
 
-// survey.logNewAnswer()
-const testData = [7, 1, 4];
-const testBind = survey.printResults.bind()
-console.log(testBind([1,2]))
-console.log(testBind(testData))
+const book = safeCount()
+book();
+book();
+// console.dir(book)
+
+
+
+let f1;
+const f2 = function () {
+    const x = 11;
+    f1= function () {
+        console.log(x**2)
+    }
+}
+
+const f3 = function () {
+    const y = 22;
+    f1= function () {
+        console.log(y**2)
+    }
+}
+
+f2();
+f1();
+f3();
+f1()
+
+
+
+
+
+
+
+
+
+
+//HWWWWWWWWWWWW
+// const btn = document.querySelector('.button');
+// btn.addEventListener('click', () => survey.logNewAnswer())
+//
+// const btnResults = document.querySelector('.button_res');
+// btnResults.addEventListener('click', () => survey.printResults(survey.answers))
+//
+// const survey = {
+//     answers: [0, 0, 0, 0, 0],
+//
+//     logNewAnswer() {
+//         let survey = +prompt('What programming language would you like to learn?\n' +
+//             '0: JavaScript\n' +
+//             '1: Python\n' +
+//             '2: Ruby\n' +
+//             '3: Java\n' +
+//             '4: C#\n')
+//         this.answersChange(survey);
+//         this.printResults(this.answers)
+//
+//     },
+//
+//     answersChange(survey) {
+//         if (survey === 1 || survey === 2 || survey === 3 || survey === 4 || survey === 0) {
+//             this.answers[survey]++
+//         }
+//     },
+//
+//     printResults(arr) {
+//         console.log('Results: ' + arr);
+//     }
+// }
+//
+// // survey.logNewAnswer()
+// const testData = [7, 1, 4];
+// const testBind = survey.printResults.bind()
+// console.log(testBind([1,2]))
+// console.log(testBind(testData))
 
 
 
