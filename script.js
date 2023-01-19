@@ -1,5 +1,61 @@
 'use strict';
 
+const btn = document.querySelector('.button');
+btn.addEventListener('click', () => survey.logNewAnswer())
+
+const btnResults = document.querySelector('.button_res');
+btnResults.addEventListener('click', () => survey.printResults(survey.answers))
+
+const survey = {
+    answers: [0, 0, 0, 0, 0],
+
+    logNewAnswer() {
+        let survey = +prompt('What programming language would you like to learn?\n' +
+            '0: JavaScript\n' +
+            '1: Python\n' +
+            '2: Ruby\n' +
+            '3: Java\n' +
+            '4: C#\n')
+        this.answersChange(survey);
+        this.printResults(this.answers)
+
+    },
+
+    answersChange(survey) {
+        if (survey === 1 || survey === 2 || survey === 3 || survey === 4 || survey === 0) {
+            this.answers[survey]++
+        }
+    },
+
+    printResults(arr) {
+        console.log('Results: ' + arr);
+    }
+}
+
+// survey.logNewAnswer()
+const testData = [7, 1, 4];
+const testBind = survey.printResults.bind()
+console.log(testBind([1,2]))
+console.log(testBind(testData))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const flightNum = 'BV328'
 // const passenger1145 = {
 //     name: 'Jo',
@@ -24,47 +80,75 @@
 //
 // console.log(flightNum);
 // console.log(passenger1145);
-
-
-const remSpace = function (text) {
-    return text.replace(/ /g, '-').toUpperCase();
-}
-
-const upperFirst = function (text) {
-    const [first, ...others] = text.split(' ');
-    return [first.toUpperCase(),...others].join(' ');
-}
-
+// const remSpace = function (text) {
+//     return text.replace(/ /g, '-').toUpperCase();
+// }
+//
+// const upperFirst = function (text) {
+//     const [first, ...others] = text.split(' ');
+//     return [first.toUpperCase(),...others].join(' ');
+// }
 // console.log(remSpace('t t ttt  tt tt '));
 // console.log(upperFirst('tttt ttt'));
-
-
 //HOF
-// const convertor = function (str, func){
+// cnst convertor = function (str, func){
 //     // console.log(`The converted text: ${func(str)}`)
 // }
 // convertor('hello', upperFirst)
-//
+
 // const greet = function (text) {
 //     return function (name){
 //         console.log(`${text} ${name}`)
+//         return function (a) {
+//             console.log(`${text} ${name} with ${a}`)
+//         }
 //     }
 // }
-
-const hi = greet('hi');
-console.log(hi)
-
-
-
-
-
-
-
+//
+// const hi = greet('hi');
+// // console.log(hi)
+// // hi('Dima');
+// greet('hi')('Jo')('Janett');
+//
+// const sayHi = (text) => (name) => console.log(`Hi ${text} ${name}!!`);
+// sayHi('Dimas')('!!');
 
 
+//this + call
 
+// const air = {
+//     airLine: 'SkyUp',
+//     airCode: 'SU',
+//     bookings: [],
+//     // book(flNum, pass){
+//     //     console.log(`${pass} booked a ticket ${this.airLine}`)
+//     // }
+// }
+// const air2 = {
+//     airLine: 'LuftGanza',
+//     airCode: 'ZU',
+//     bookings: [],
+//
+// }
+// // air.book(2345, 'Jo Genry');
+// // const book = air.book;
+// const book = function (flNum, pass){
+//     console.log(`${pass} booked a ticket ${this.airLine}`)
+// }
+// // book(345, 'John Datton');
+// // book.call(air2, 345, 'John Datton');
+// // book.call(air, 111, 'Jo Won');
+//
+//
+//
+// //this + bind
+//
+// const bookAir = book.bind(air);
+// const bookAir22 = book.bind(bookAir, 22);
+// bookAir(222, 'Victor Shoe')
+// bookAir22('Vi Shoe')
 
-
+// console.log(bookAir)
 
 
 //
