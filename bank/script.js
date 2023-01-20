@@ -5,12 +5,12 @@
 const account1 = {
     userName: 'Cecil Ireland',
     transactions: [500, 250, -300, 5000, -850, -110, -170, 1100],
-    interest: 1.5,
+    interest: 1.15,
     pin: 1111,
 };
 
 const account2 = {
-    userName: 'Amani Salt',
+    userName: 'Dima Kovalev',
     transactions: [2000, 6400, -1350, -70, -210, -2000, 5500, -30],
     interest: 1.3,
     pin: 2222,
@@ -85,8 +85,52 @@ const displayTransactions = function (transactions) {
     });
 }
 
-displayTransactions(account1.transactions)
+const displayBalance = function (mainAccount) {
+  labelBalance.innerHTML = '';
+  const balance = mainAccount.transactions.reduce((acc, b) => acc + b, 0);
+  labelBalance.innerHTML = `${balance} $`
 
-labelBalance.innerHTML = '';
-const balance = account1.transactions.reduce((acc, b) => acc +b, 0);
-labelBalance.innerHTML = `${balance} $`
+  labelSumIn.innerHTML = '';
+  const balanceIn = mainAccount.transactions.filter(trans => trans > 0).reduce((acc, a) => acc + a, 0);
+  labelSumIn.innerHTML = balanceIn + '$';
+
+  labelSumInterest.innerHTML = '$';
+  const interest = Math.floor(mainAccount.transactions.filter(trans => trans > 0).map(dep => dep * 1.15 / 100).reduce((acc, a) => acc + a, 0));
+  labelSumInterest.innerHTML = interest + '$';
+
+  labelSumOut.innerHTML = '';
+  const balanceOut = mainAccount.transactions.filter(trans => trans < 0).reduce((acc, a) => acc + a, 0);
+  labelSumOut.innerHTML = balanceOut + '$';
+}
+
+let mainAccount;
+
+btnLogin.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const userPin = inputLoginPin.value;
+    mainAccount = accounts.find(account => account.userName === inputLoginUsername.value)
+
+  if(mainAccount && mainAccount?.pin === Number(inputLoginPin.value)) {
+    console.log('pin ok!')
+
+    inputLoginUsername.value='';
+    inputLoginPin.value='';
+
+    containerApp.style.opacity = 100;
+
+    labelWelcome.textContent = `Welcome, ${mainAccount.userName.split(' ')[0]}!`
+
+    displayTransactions(mainAccount.transactions);
+    displayBalance(mainAccount)
+
+
+  } else {
+    console.log('pin not ok!');
+  }
+
+
+});
+
+
+
