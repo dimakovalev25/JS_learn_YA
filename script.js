@@ -1,52 +1,129 @@
 'use strict';
-//IIFI
+//Arrays
 
-const runOne = function () {
-    console.log('1');
-};
+const currencis = new Map([
+    ['USD', 'Dollar'],
+    ['EUR', 'EURO']
+]);
 
-(function() {
-    // console.log('IIFI')
-})();
+const transaction = [300, 250, -500, -4000,5,-7];
 
-
-//Closures  замыкания
-// let count = 6;
-const safeCount = function () {
-    let count = 0;
-
-    return function(){
-        count++;
-        // console.log(count)
-    }
+for (const [i, tr] of transaction.entries()){
+    // console.log(`transaction number:${i+1} ${tr}$`);
 }
 
-const book = safeCount()
-book();
-book();
-// console.dir(book)
+// console.log(transaction.entries())
+
+// for (let i = 0; i< transaction.length; i++) {
+//     if (transaction[i] > 0){
+//         console.log('Add')
+//     } else {
+//         console.log('Remove')
+//     }
+// }
+
+transaction.forEach(function (item, index, array){
+    // if(item>0){
+    //     console.log(`${item} added`);
+    // } else {
+    //     console.log(`${item} removed`);
+    // }
+    console.log(`Transaction №${index} ${item}$ from arr ${array}`)
+
+})
+
+/////////////////////////////////////////////////////////////////////
+
+let arr1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+let arr = [0,1,2,3,4,5];
+// console.log(arr.slice(-1));
+// console.log(arr.slice(-3,-1));
+// console.log([...arr])
+
+// console.log(arr.splice(3))
+// console.log(arr.splice(-1))
+// console.log(arr)
+
+// console.log(arr.reverse());
+// console.log(arr1.concat(arr).reverse().join('-'));
 
 
 
-let f1;
-const f2 = function () {
-    const x = 11;
-    f1= function () {
-        console.log(x**2)
-    }
-}
 
-const f3 = function () {
-    const y = 22;
-    f1= function () {
-        console.log(y**2)
-    }
-}
 
-f2();
-f1();
-f3();
-f1()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //IIFI
+//
+// const runOne = function () {
+//     console.log('1');
+// };
+//
+// (function() {
+//     // console.log('IIFI')
+// })();
+//
+//
+// //Closures  замыкания
+// // let count = 6;
+// const safeCount = function () {
+//     let count = 0;
+//
+//     return function(){
+//         count++;
+//         // console.log(count)
+//     }
+// }
+//
+// const book = safeCount()
+// book();
+// book();
+// // console.dir(book)
+//
+//
+//
+// let f1;
+// const f2 = function () {
+//     const x = 11;
+//     f1= function () {
+//         console.log(x**2)
+//     }
+// }
+//
+// const f3 = function () {
+//     const y = 22;
+//     f1= function () {
+//         console.log(y**2)
+//     }
+// }
+//
+// f2();
+// f1();
+// f3();
+// f1()
 
 
 
