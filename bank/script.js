@@ -3,10 +3,10 @@
 // Simply Bank App
 
 const account1 = {
-    userName: 'Cecil Ireland',
+    userName: 'q',
     transactions: [500, 250, -300, 5000, -850, -110, -170, 1100],
     interest: 1.15,
-    pin: 1111,
+    pin: 1,
 };
 
 const account2 = {
@@ -86,24 +86,29 @@ const displayTransactions = function (transactions) {
 }
 
 const displayBalance = function (mainAccount) {
-  labelBalance.innerHTML = '';
-  const balance = mainAccount.transactions.reduce((acc, b) => acc + b, 0);
-  labelBalance.innerHTML = `${balance} $`
+    labelBalance.innerHTML = '';
+    const balance = mainAccount.transactions.reduce((acc, b) => acc + b, 0);
+    mainAccount.balance = balance;
+    labelBalance.innerHTML = `${balance} $`
+    // console.log(mainAccount)
 
-  labelSumIn.innerHTML = '';
-  const balanceIn = mainAccount.transactions.filter(trans => trans > 0).reduce((acc, a) => acc + a, 0);
-  labelSumIn.innerHTML = balanceIn + '$';
+    labelSumIn.innerHTML = '';
+    const balanceIn = mainAccount.transactions.filter(trans => trans > 0).reduce((acc, a) => acc + a, 0);
+    labelSumIn.innerHTML = balanceIn + '$';
 
-  labelSumInterest.innerHTML = '$';
-  const interest = Math.floor(mainAccount.transactions.filter(trans => trans > 0).map(dep => dep * 1.15 / 100).reduce((acc, a) => acc + a, 0));
-  labelSumInterest.innerHTML = interest + '$';
+    labelSumInterest.innerHTML = '$';
+    const interest = Math.floor(mainAccount.transactions.filter(trans => trans > 0).map(dep => dep * 1.15 / 100).reduce((acc, a) => acc + a, 0));
+    labelSumInterest.innerHTML = interest + '$';
 
-  labelSumOut.innerHTML = '';
-  const balanceOut = mainAccount.transactions.filter(trans => trans < 0).reduce((acc, a) => acc + a, 0);
-  labelSumOut.innerHTML = balanceOut + '$';
+    labelSumOut.innerHTML = '';
+    const balanceOut = mainAccount.transactions.filter(trans => trans < 0).reduce((acc, a) => acc + a, 0);
+    labelSumOut.innerHTML = balanceOut + '$';
 }
 
 let mainAccount;
+
+inputLoginUsername.value = 'Dima Kovalev';
+inputLoginPin.value = '2222';
 
 btnLogin.addEventListener('click', function (e) {
     e.preventDefault();
@@ -111,26 +116,58 @@ btnLogin.addEventListener('click', function (e) {
     const userPin = inputLoginPin.value;
     mainAccount = accounts.find(account => account.userName === inputLoginUsername.value)
 
-  if(mainAccount && mainAccount?.pin === Number(inputLoginPin.value)) {
-    console.log('pin ok!')
+    if (mainAccount && mainAccount?.pin === Number(inputLoginPin.value)) {
+        // console.log('pin ok!')
 
-    inputLoginUsername.value='';
-    inputLoginPin.value='';
+        inputLoginUsername.value = 'Dima Kovalev';
+        inputLoginPin.value = '2222';
 
-    containerApp.style.opacity = 100;
+        containerApp.style.opacity = 100;
 
-    labelWelcome.textContent = `Welcome, ${mainAccount.userName.split(' ')[0]}!`
+        labelWelcome.textContent = `Welcome, ${mainAccount.userName.split(' ')[0]}!`
 
-    displayTransactions(mainAccount.transactions);
-    displayBalance(mainAccount)
+        displayTransactions(mainAccount.transactions);
+        displayBalance(mainAccount)
 
 
-  } else {
-    console.log('pin not ok!');
-  }
+    } else {
+        console.log('pin not ok!');
+    }
 
 
 });
 
+btnTransfer.addEventListener('click', function (e) {
+    e.preventDefault();
+    const transferAmount = Number(inputTransferAmount.value);
+    const recepientName = inputTransferTo.value;
+    const recepientAccount = accounts.find(account => account.userName === recepientName)
+    // console.log(transferAmount, recepientAccount);
+
+    if (transferAmount > 0 && mainAccount.balance >= transferAmount && recepientAccount && mainAccount.userName !== recepientAccount?.userName) {
+        // console.log('tr')
+        mainAccount.transactions.push(-transferAmount);
+        recepientAccount.transactions.push(transferAmount);
+
+      displayTransactions(mainAccount.transactions);
+      displayBalance(mainAccount);
 
 
+    }
+})
+
+btnClose.addEventListener('click', function(e) {
+    e.preventDefault();
+    const user = inputCloseUsername.value;
+    const pin = inputClosePin.value;
+
+    if(inputCloseUsername.value === mainAccount.userName && Number(inputClosePin.value) === mainAccount.pin) {
+        const mainAccountIndex = accounts.findIndex(account => account.userName === inputCloseUsername.value)
+        accounts.splice(mainAccountIndex, 1);
+        containerApp.style.opacity = 0;
+        inputClosePin.value='';
+        inputCloseUsername.value='';
+        labelWelcome.textContent = `Log into your account!`
+        console.log(accounts);
+    }
+})
