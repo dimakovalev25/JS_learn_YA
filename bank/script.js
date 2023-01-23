@@ -1,4 +1,29 @@
 'use strict';
+// Elements
+const labelWelcome = document.querySelector('.welcome');
+const labelDate = document.querySelector('.date');
+const labelBalance = document.querySelector('.balance__value');
+const labelSumIn = document.querySelector('.total__value--in');
+const labelSumOut = document.querySelector('.total__value--out');
+const labelSumInterest = document.querySelector('.total__value--interest');
+const labelTimer = document.querySelector('.timer');
+
+const containerApp = document.querySelector('.app');
+const containerTransactions = document.querySelector('.transactions');
+
+const btnLogin = document.querySelector('.login__btn');
+const btnTransfer = document.querySelector('.form__btn--transfer');
+const btnLoan = document.querySelector('.form__btn--loan');
+const btnClose = document.querySelector('.form__btn--close');
+const btnSort = document.querySelector('.btn--sort');
+
+const inputLoginUsername = document.querySelector('.login__input--user');
+const inputLoginPin = document.querySelector('.login__input--pin');
+const inputTransferTo = document.querySelector('.form__input--to');
+const inputTransferAmount = document.querySelector('.form__input--amount');
+const inputLoanAmount = document.querySelector('.form__input--loan-amount');
+const inputCloseUsername = document.querySelector('.form__input--user');
+const inputClosePin = document.querySelector('.form__input--pin');
 
 // Simply Bank App
 
@@ -39,33 +64,10 @@ const account5 = {
 
 const accounts = [account1, account2, account3, account4, account5];
 
-// Elements
-const labelWelcome = document.querySelector('.welcome');
-const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.balance__value');
-const labelSumIn = document.querySelector('.total__value--in');
-const labelSumOut = document.querySelector('.total__value--out');
-const labelSumInterest = document.querySelector('.total__value--interest');
-const labelTimer = document.querySelector('.timer');
-
-const containerApp = document.querySelector('.app');
-const containerTransactions = document.querySelector('.transactions');
-
-const btnLogin = document.querySelector('.login__btn');
-const btnTransfer = document.querySelector('.form__btn--transfer');
-const btnLoan = document.querySelector('.form__btn--loan');
-const btnClose = document.querySelector('.form__btn--close');
-const btnSort = document.querySelector('.btn--sort');
-
-const inputLoginUsername = document.querySelector('.login__input--user');
-const inputLoginPin = document.querySelector('.login__input--pin');
-const inputTransferTo = document.querySelector('.form__input--to');
-const inputTransferAmount = document.querySelector('.form__input--amount');
-const inputLoanAmount = document.querySelector('.form__input--loan-amount');
-const inputCloseUsername = document.querySelector('.form__input--user');
-const inputClosePin = document.querySelector('.form__input--pin');
-
 containerTransactions.innerHTML = '';
+let mainAccount;
+inputLoginUsername.value = 'Dima Kovalev';
+inputLoginPin.value = '2222';
 
 const displayTransactions = function (transactions) {
     transactions.forEach(function (trans, index) {
@@ -104,11 +106,6 @@ const displayBalance = function (mainAccount) {
     const balanceOut = mainAccount.transactions.filter(trans => trans < 0).reduce((acc, a) => acc + a, 0);
     labelSumOut.innerHTML = balanceOut + '$';
 }
-
-let mainAccount;
-
-inputLoginUsername.value = 'Dima Kovalev';
-inputLoginPin.value = '2222';
 
 btnLogin.addEventListener('click', function (e) {
     e.preventDefault();
@@ -154,7 +151,7 @@ btnTransfer.addEventListener('click', function (e) {
 
 
     }
-})
+});
 
 btnClose.addEventListener('click', function(e) {
     e.preventDefault();
@@ -168,6 +165,28 @@ btnClose.addEventListener('click', function(e) {
         inputClosePin.value='';
         inputCloseUsername.value='';
         labelWelcome.textContent = `Log into your account!`
-        console.log(accounts);
+        // console.log(accounts);
     }
+});
+
+btnLoan.addEventListener('click', function (e) {
+    e.preventDefault();
+    const loanAmount = Number(inputLoanAmount.value)
+
+    console.log(inputLoanAmount.value);
+    if(loanAmount > 0 && mainAccount.transactions.some(tr => tr >= loanAmount/10 )){
+        mainAccount.transactions.push(loanAmount);
+        mainAccount.loan =loanAmount;
+        displayTransactions(mainAccount.transactions);
+        displayBalance(mainAccount);
+        inputLoanAmount.value = '';
+    }
+});
+
+btnSort.addEventListener('click', function (e) {
+    e.preventDefault();
+    containerTransactions.innerHTML=''
+    mainAccount.transactions.sort((a, b) => a-b);
+    displayTransactions(mainAccount.transactions);
+
 })
