@@ -139,6 +139,27 @@ let mainAccount;
 inputLoginUsername.value = 'Dima Kovalev';
 inputLoginPin.value = '2222';
 
+const startLogoutTimer = function () {
+    let time = 300;
+
+    const logOutTimer = setInterval(function () {
+
+    const min = String(Math.trunc(time /60)).padStart(2, '0');
+    const sec = String(time % 60).padStart(2, '0');
+    labelTimer.textContent=`${min} min : ${sec} sec`;
+    if (time === 0){
+        clearInterval(logOutTimer);
+        containerApp.style.opacity = 0;
+        inputLoginUsername.value = '';
+        inputLoginPin.value = '';
+        labelWelcome.textContent = `Log into your account!`
+    }
+    time--;
+
+    }, 1000)
+}
+
+
 const displayTransactions = function (account) {
     account.transactions.forEach(function (trans, index) {
 
@@ -160,6 +181,8 @@ const displayTransactions = function (account) {
             </div>`
 
         containerTransactions.insertAdjacentHTML('afterbegin', transactionRow)
+
+        startLogoutTimer();
 
     });
 }
