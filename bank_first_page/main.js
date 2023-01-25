@@ -17,23 +17,23 @@
 
 //.insertAdjacentHTML()
 const mess = document.createElement('div');
-const h1 = document.createElement('h1');
-h1.innerHTML = 'h1 message';
-h1.textContent = 'simple bank';
+// const h1 = document.createElement('h1');
+// h1.innerHTML = 'h1 message';
+// h1.textContent = 'simple bank';
 // mess.style = 'backgroundColor: red'
 // mess.style.backgroundColor='white';
 // mess.textContent='We use cookies!';
 
-mess.innerHTML = 'We use cookies! <button class="btn btn--close-cookie">OK!</button>';
-const header = document.querySelector('.header');
-header.prepend(mess);
+// mess.innerHTML = 'We use cookies! <button class="btn btn--close-cookie">OK!</button>';
+// const header = document.querySelector('.header');
+// header.prepend(mess);
 // header.prepend(h1);
 // header.before(mess);
 // header.after(mess);
 // header.prepend(mess.cloneNode(true));
 // header.append(mess.cloneNode(true));
 // console.log(header)
-document.querySelector('.btn--close-cookie').addEventListener('click', () => mess.remove());
+// document.querySelector('.btn--close-cookie').addEventListener('click', () => mess.remove());
 
 
 //style, class, attribute ----------------------------------------------
@@ -113,3 +113,21 @@ const getRandomColor = () => `rgb(${getRandomInt(0,255)}, ${getRandomInt(0,255)}
 //     console.log('document', e.target)
 //     this.style.backgroundColor = getRandomColor()
 // })
+
+
+//DOM traversing
+// to kids
+const h1 = document.querySelector('h1');
+h1.querySelectorAll('.highlight');
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes);
+// console.log(h1.children);
+// console.log(h1.firstElementChild);
+
+//to parents
+// console.log(h1.parentElement);
+// h1.closest('.header').style.backgroundColor = 'red';
+
+//neighbors
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);

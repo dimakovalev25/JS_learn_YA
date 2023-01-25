@@ -66,6 +66,26 @@ document.addEventListener('keydown', function (e) {
 });
 
 
+//making tabs
 
+const tabContents = document.querySelectorAll('.operations__content');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContainer = document.querySelector('.operations__tab-container');
 
+tabContainer.addEventListener('click', function (e) {
+    const clickedButton = e.target.closest('.operations__tab');
+    //guard
+    if(!clickedButton) return;
+
+    // console.log(clickedButton)
+    tabs.forEach(i=> i.classList.remove('operations__tab--active'))
+    clickedButton.classList.add('operations__tab--active');
+
+    tabContents.forEach(content => content.classList.remove('operations__content--active'))
+    document.querySelector(`.operations__content--${clickedButton.dataset.tab}`).classList.add('operations__content--active');
+    console.log(tabContents)
+
+    console.log(clickedButton.dataset.tab)
+
+})
 
