@@ -13,7 +13,7 @@ btnScroll.addEventListener('click', function (e) {
     //     behavior: 'smooth'
     // });
     section1.scrollIntoView({
-      behavior:'smooth'
+        behavior: 'smooth'
     })
 })
 
@@ -21,7 +21,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     e.preventDefault();
     console.log('links', e.target)
 
-    if(e.target.classList.contains('nav__link')){
+    if (e.target.classList.contains('nav__link')) {
         const href = e.target.getAttribute('href');
         document.querySelector(href).scrollIntoView({
             behavior: 'smooth'
@@ -29,7 +29,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     }
 
 })
-
 
 
 // Modal window
@@ -75,17 +74,41 @@ const tabContainer = document.querySelector('.operations__tab-container');
 tabContainer.addEventListener('click', function (e) {
     const clickedButton = e.target.closest('.operations__tab');
     //guard
-    if(!clickedButton) return;
+    if (!clickedButton) return;
 
     // console.log(clickedButton)
-    tabs.forEach(i=> i.classList.remove('operations__tab--active'))
+    tabs.forEach(i => i.classList.remove('operations__tab--active'))
     clickedButton.classList.add('operations__tab--active');
 
     tabContents.forEach(content => content.classList.remove('operations__content--active'))
     document.querySelector(`.operations__content--${clickedButton.dataset.tab}`).classList.add('operations__content--active');
     console.log(tabContents)
-
     console.log(clickedButton.dataset.tab)
 
 })
 
+
+//button fading
+
+const navLinksHoverAnimation = function (e, opacity) {
+    if (e.target.classList.contains('nav__link')) {
+        const linkOver = e.target;
+        const siblingLinks = linkOver.closest('.nav__links').querySelectorAll('.nav__link');
+        const logo = linkOver.closest('.nav').querySelector('img');
+        const logoText = linkOver.closest('.nav').querySelector('.nav__text');
+
+        siblingLinks.forEach(el => {
+            if (el !== linkOver) el.style.opacity = opacity;
+        })
+        logo.style.opacity = opacity;
+        logoText.style.opacity = opacity;
+    }
+}
+
+const nav = document.querySelector('nav');
+nav.addEventListener('mouseover', function (e) {
+    navLinksHoverAnimation(e, 0.4)
+})
+nav.addEventListener('mouseout', function (e) {
+    navLinksHoverAnimation(e, 1)
+})
