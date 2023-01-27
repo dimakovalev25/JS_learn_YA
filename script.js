@@ -51,7 +51,7 @@ const totalRed = accounts
         return acc
     }, {dep: 0, withdraw: 0});
 
-console.log(totalRed)
+// console.log(totalRed)
 
 const text ='work with javascript and react';
 
@@ -65,4 +65,4 @@ const textToTitleCase = function (text) {
     return titleCase
 
 }
-console.log(textToTitleCase(text))
+// console.log(textToTitleCase(text))
