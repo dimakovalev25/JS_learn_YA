@@ -72,32 +72,6 @@ const h2 = document.querySelector('h2');
 // console.dir(h => h*1)
 
 
-//HW
-// {
-//     const Car = function (name, speed) {
-//         this.name = name;
-//         this.speed = speed;
-//     }
-//
-//     Car.prototype.accelerate = function () {
-//         console.log(this.speed + 50)
-//     }
-//
-//     Car.prototype.break = function () {
-//         console.log(this.speed - this.speed)
-//     }
-//
-//     const honda = new Car('honda', 120)
-//     const lexus = new Car('lexus', 125)
-//
-// // console.log(honda, lexus)
-// // console.log(honda.accelerate())
-// // console.log(honda.break())
-// // console.log(lexus.break())
-//
-// }
-
-
 //Class ES6
 
 class User {
@@ -111,6 +85,7 @@ class User {
         console.log(this.password)
     }
 }
+
 User.prototype.greet = function () {
     console.log(`Welcome ${this.name}`)
 }
@@ -141,46 +116,7 @@ const alex = new User('alex', 11111);
 // }
 
 
-//HW
-// {
-//     class Car {
-//         constructor(name, speed) {
-//             this.name = name;
-//             this.speed = speed;
-//
-//         }
-//
-//         accelerate() {
-//             console.log(this.speed + 10)
-//         }
-//
-//         break() {
-//             console.log(this.speed - 10)
-//         }
-//
-//         get speedMph() {
-//             return this.speed = this.speed / 1.6
-//             // console.log(`${this.speed / 1.6} Mph `)
-//         }
-//
-//         set speedMph(speed) {
-//             return this.speed = speed * 1.6
-//             // console.log(`${this.speed / 1.6} Mph `)
-//         }
-//
-//     }
-//
-//     const audi = new Car('audi', 140);
-//     console.log(audi)
-//     audi.speedMph = 100;
-//     console.log(audi.speed)
-// }
-
-
-
-
-
-//Реальное наследование классов в JS!
+//Реальное наследование в функциях конструкторах в JS!
 
 const Persona = function (firstName, year) {
     this.firstName = firstName;
@@ -215,4 +151,62 @@ const ivan = new Student('ivan', 23, 'JS');
 // ivan.introduce()
 // ivan.printAge()
 // console.log(ivan.__proto__);
-console.log(Object.getPrototypeOf(ivan))
+// console.log(Object.getPrototypeOf(ivan))
+
+
+//наследвание в Классах JS
+
+class Vehicle {
+    constructor(name, number) {
+        this.name = name;
+        this.number = number;
+    }
+
+    printName() {
+        console.log(this.name)
+    }
+}
+
+class ElVehicle extends Vehicle {
+    constructor(name, number, charge) {
+        super(name, number);
+        this.charge = charge;
+    }
+
+    printName() {
+        console.log(`Electro car ${this.name}`)
+    }
+}
+
+// const tesla3 = new ElVehicle('tesla3', 1111, 33)
+// console.log(tesla3);
+// tesla3.printName()
+// tesla3.color = 'red';
+// console.log(tesla3)
+
+
+
+
+
+
+//реальное наследование через Object.create
+
+const PersonPrototype = function (name, year) {
+    this.name = name;
+    this.year = year;
+    this.print = function () {
+        console.log(this.name);
+    }
+}
+
+// const dima = Object.create(PersonPrototype);
+// console.log(dima)
+// const jo = new PersonPrototype('jo', 22)
+// jo.print();
+const jo = Object.create(PersonPrototype);
+const joJunior = Object.create(jo);
+console.log(jo)
+console.log(joJunior)
+
+
+
