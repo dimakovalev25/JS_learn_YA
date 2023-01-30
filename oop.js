@@ -185,10 +185,6 @@ class ElVehicle extends Vehicle {
 // console.log(tesla3)
 
 
-
-
-
-
 //реальное наследование через Object.create
 
 const PersonPrototype = function (name, year) {
@@ -203,10 +199,70 @@ const PersonPrototype = function (name, year) {
 // console.log(dima)
 // const jo = new PersonPrototype('jo', 22)
 // jo.print();
-const jo = Object.create(PersonPrototype);
-const joJunior = Object.create(jo);
-console.log(jo)
-console.log(joJunior)
+// const jo = Object.create(PersonPrototype);
+// const joJunior = Object.create(jo);
+// console.log(jo)
+// console.log(joJunior)
+
+
+//1 example Class
+//Public & private
+class Account {
+    // Public
+    local = navigator.language;
+
+    //Private
+    #transactions = [200, 800];
+    #pin;
+
+    constructor(name, currency, pin = 1111) {
+        this.name = name;
+        this.transaction = [];
+        this.#pin = pin;
+        this.currency = currency;
+    }
+
+    deposit(value) {
+        this.transaction.push(value);
+        return this
+    }
+
+    withdraw(value) {
+        // this.transaction.push(-value);
+        this.deposit(-value)
+        return this
+    }
+
+    getTransactions() {
+        return this.#transactions
+    }
+
+    changePin(){
+        this.#changePinDefault();
+    }
+
+    #changePinDefault() {
+        this.#pin = '0000';
+    }
+
+}
+
+const acc1 = new Account('user111', 5000, 3333)
+const acc2 = new Account('user112', 5000, 4444)
+
+acc1.withdraw(2000)
+acc1.deposit(4000)
+acc1.changePin()
+// console.log(acc1.getTransactions())
+// console.log(acc1)
 
 
 
+
+//method chaining
+acc1
+    .deposit(200)
+    .deposit(100)
+    .deposit(50000)
+    .withdraw(200)
+console.log(acc1)
