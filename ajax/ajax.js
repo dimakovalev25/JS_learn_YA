@@ -4,6 +4,8 @@
 //XMLHttpRequest
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
+const inp = document.querySelector('.inp-country');
+const btnInp = document.querySelector('.btn-country');
 
 
 const dispayCountry = function (data, className = '') {
@@ -102,20 +104,64 @@ getCountryData('usa');
 //
 // }
 
+
 const getCountryInfo = function (countryName) {
     fetch(`https://restcountries.com/v3.1/name/${countryName}`)
-        .then(res => res.json())
+        .then(res => {
+
+            // if (!res.ok) {
+            //     throw new Error(`Country not found`)
+            // }
+                return res.json()
+        })
+
+
         .then(data => {
             dispayCountry(data[0]);
             const neighbour = data[0].borders[0];
-            console.log(neighbour)
+            // console.log(neighbour)
 
             return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
         })
         .then(res => res.json())
         .then(data => dispayCountry(data[0], 'neighbour'))
+        //ловим ошибку
+        .catch(e => alert(e))
+        //финальное действие
+        .finally(() => {
+            // console.log('ok')
+            countriesContainer.style.opacity = 1;
+        })
 
 }
 
-getCountryInfo('usa');
-// getCountryInfo('canada');
+
+// let mainCountry = '';
+
+inp.addEventListener('change', (event) => {
+    let mainCountry = event.target.value;
+    // console.log(mainCountry)
+    // return mainCountry;
+
+    btnInp.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(mainCountry);
+        countriesContainer.insertAdjacentHTML('beforeend', ' ');
+        getCountryInfo(mainCountry);
+        inp.value = '';
+
+    })
+})
+
+
+
+//Event loop
+console.log('start');
+setTimeout(() => console.log('timeout 0'), 0);
+Promise.resolve('promise 1' )
+    .then(res => console.log(res));
+console.log('end');
+// start
+// end
+// promise 1
+// timeout 0
