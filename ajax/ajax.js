@@ -1,5 +1,7 @@
 'use strict';
 
+
+//XMLHttpRequest
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
@@ -35,10 +37,10 @@ const getCountryData = function (country) {
         const [data] = JSON.parse(this.responseText)
 
 
-        dispayCountry(data);
+        // dispayCountry(data);
 
         const [firstNeighbor] = data.borders;
-        console.log(firstNeighbor);
+        // console.log(firstNeighbor);
         if (!firstNeighbor) return;
 
         const request2 = new XMLHttpRequest();
@@ -47,8 +49,8 @@ const getCountryData = function (country) {
         request2.addEventListener('load', function () {
             const [data2] = JSON.parse(this.responseText);
 
-            console.log(data2);
-            dispayCountry(data2, 'neighbour');
+            // console.log(data2);
+            // dispayCountry(data2, 'neighbour');
 
 
         })
@@ -60,15 +62,60 @@ const getCountryData = function (country) {
 // getCountryData('argentina');
 getCountryData('usa');
 
-setTimeout(() => {
-    console.log(1);
-    setTimeout(() => {
-        console.log(2)
-        setTimeout(() => {
-            console.log(3)
-            setTimeout(() => {
-                console.log(4)
-            }, 1000)
-        }, 1000)
-    }, 1000)
-}, 1000)
+// setTimeout(() => {
+//     console.log(1);
+//     setTimeout(() => {
+//         console.log(2)
+//         setTimeout(() => {
+//             console.log(3)
+//             setTimeout(() => {
+//                 console.log(4)
+//             }, 1000)
+//         }, 1000)
+//     }, 1000)
+// }, 1000)
+
+
+//fetch api
+
+// const request = new XMLHttpRequest();
+// request.open('GET', `https://restcountries.com/v3.1/name/${country}`)
+// request.send();
+// request.addEventListener('load', function () {
+//     const [data] = JSON.parse(this.responseText)}
+
+// const req = fetch('https://restcountries.com/v3.1/name/belarus');
+// console.log(req)
+//
+// const req2 = fetch('ff');
+// console.log(req2)
+
+// const getCountryInfo = function (countryName) {
+//     const request = fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+//         .then(function (response) {
+//             // console.log(response)
+//             return response.json()
+//         })
+//         .then(function ([data]) {
+//             console.log(data)
+//         })
+//
+// }
+
+const getCountryInfo = function (countryName) {
+    fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+        .then(res => res.json())
+        .then(data => {
+            dispayCountry(data[0]);
+            const neighbour = data[0].borders[0];
+            console.log(neighbour)
+
+            return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
+        })
+        .then(res => res.json())
+        .then(data => dispayCountry(data[0], 'neighbour'))
+
+}
+
+getCountryInfo('usa');
+// getCountryInfo('canada');

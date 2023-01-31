@@ -105,6 +105,7 @@ body {
   color: white;
   background-color: rgb(216, 11, 11);
   cursor: pointer;
+  margin-top: 3rem;
 }
 
 .images {
